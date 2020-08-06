@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { NotionRenderer } from "react-notion";
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const pageId = process.env.NOTION_PAGE_ID;
   const domain = process.env.NOTION_API_WORKER_DOMAIN;
   const token = process.env.NOTION_API_TOKEN;
