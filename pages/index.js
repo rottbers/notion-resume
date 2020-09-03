@@ -6,25 +6,25 @@ export async function getServerSideProps() {
   const domain = process.env.NOTION_API_WORKER_DOMAIN;
   const token = process.env.NOTION_API_TOKEN;
 
-  if (!pageId || !domain) return { props: {} };
+  const title = process.env.META_TITLE || "Resume";
+  const description = process.env.META_DESCRIPTION || "...";
 
-  const url = `https://${domain}/v1/page/${pageId}`;
-  const options = token ? { headers: { Authorization: `Bearer ${token}` } } : {};
+  try {
+    if (!pageId || !domain) throw new Error("No pageId or domain");
 
-  const response = await fetch(url, options);
-  const blockMap = await response.json();
+    const url = `https://${domain}/v1/page/${pageId}`;
+    const options = token ? { headers: { Authorization: `Bearer ${token}` } } : {};
 
-  const meta = {
-    title: process.env.META_TITLE || "Resume",
-    description: process.env.META_DESCRIPTION || "...",
-  };
+    const response = await fetch(url, options);
+    const blockMap = await response.json();
 
-  return { props: { blockMap, meta } };
+    return { props: { title, description, blockMap } };
+  } catch (error) {
+    return { props: { title, description } };
+  }
 }
 
-const ResumePage = ({ blockMap, meta }) => {
-  const title = meta?.title;
-  const description = meta?.description;
+const ResumePage = ({ title, description, blockMap }) => {
 
   return (
     <>
