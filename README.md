@@ -6,7 +6,7 @@ Many thanks to [react-notion](https://github.com/splitbee/react-notion/) and [no
 
 > _Use with caution. This is based on the private Notion API. We can not guarantee it will stay stable._
 
-## Enviornment variables
+## Environment variables
 
 ### `NOTION_PAGE_ID`
 
@@ -24,10 +24,14 @@ Used for auth. Only required if the notion page is private and not "shared to th
 
 As stated in the [notion-api-worker docs](https://github.com/splitbee/notion-api-worker/#receiving-the-token), to obtain your token look for a cookie named `token_v2` using the browser developer tools while logged in to your notion account.
 
-### `META_TITLE` (optional)
+### `NEXT_PUBLIC_META_TITLE` (optional)
 
 Used to set the page meta title (e.g. `Resume | Jane Doe`). Will default to `Resume` if left undefined.
 
-### `META_DESCRIPTION` (optional)
+### `NEXT_PUBLIC_META_DESCRIPTION` (optional)
 
 Used to set the page meta description (e.g. `Happy dev looking for...`). Will default to `...` if left undefined.
+
+### `NEXT_PUBLIC_META_URL` (optional)
+
+Used to get the public base URL (e.g. `https://domain.tld`) during build time for meta tags.
